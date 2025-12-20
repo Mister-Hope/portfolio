@@ -1,5 +1,7 @@
 import type { FC } from "react";
+import type { AdaptiveImageSource } from "../types/index.js";
 import { isCJKLocale } from "../utils/index.js";
+import { AdaptiveImage } from "./AdaptiveImage.js";
 import { Icon } from "./Icon.js";
 import { RichContent } from "./RichContent.js";
 
@@ -36,7 +38,7 @@ export interface CardItem {
    * Optional logo URL or object with light/dark mode URLs
    * 可选的标志 URL 或包含亮色/暗色模式 URL 的对象
    */
-  logo?: string | { light: string; dark: string };
+  logo?: AdaptiveImageSource;
 
   /**
    * Category label (e.g., "Thesis")
@@ -80,31 +82,22 @@ export const Cards: FC<CardsProps> = ({ items, locale }) => {
   return (
     <div className="card-grid">
       {items.map((card, idx) => (
-        <div key={idx} className="card-base card-item">
+        <div key={idx} className="card-item flex flex-col card-base">
           <div className="card-decoration" />
-          <div className="relative z-10">
+          <div className="relative z-10 block">
             {card.category && (
-              <h4 className={`label-sm mb-3 ${isCJK ? "" : "tracking-widest"}`}>
+              <h4 className={`mb-3 label-sm ${isCJK ? "" : "tracking-widest"}`}>
                 {card.category}
               </h4>
             )}
-            {card.logo &&
-              (typeof card.logo === "string" ? (
-                <img
-                  src={card.logo}
-                  alt={card.title}
-                  className="card-logo float-right ml-4 mb-2"
-                  loading="lazy"
-                />
-              ) : (
-                <picture className="card-logo float-right ml-4 mb-2">
-                  <source
-                    media="(prefers-color-scheme: dark)"
-                    srcSet={card.logo.dark}
-                  />
-                  <img src={card.logo.light} alt={card.title} loading="lazy" />
-                </picture>
-              ))}
+            {card.logo && (
+              <AdaptiveImage
+                src={card.logo}
+                alt={card.title}
+                className="card-logo float-right mb-2 ml-4"
+                loading="lazy"
+              />
+            )}
             <h3 className="card-title">
               <RichContent content={card.title} />
             </h3>
@@ -115,33 +108,40 @@ export const Cards: FC<CardsProps> = ({ items, locale }) => {
                 block
               />
             )}
-            {card.actions?.map((action, actionIndex) => {
-              const content = (
-                <>
-                  <span>{action.text}</span>
-                  {action.icon && (
-                    <Icon icon={action.icon} className="text-lg inline-block" />
-                  )}
-                </>
-              );
-
-              return action.link ? (
-                <a
-                  key={actionIndex}
-                  href={action.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-action mr-4"
-                >
-                  {content}
-                </a>
-              ) : (
-                <span key={actionIndex} className="card-action mr-4">
-                  {content}
-                </span>
-              );
-            })}
           </div>
+          {card.actions && (
+            <div className="relative z-10 mt-auto flex flex-wrap items-center">
+              {card.actions.map(({ text, icon, link }, actionIndex) => {
+                if (!text && !icon) return null;
+
+                const className = `card-action ${text ? "mx-1" : "mx-0.5"}`;
+                const content = (
+                  <>
+                    {text && <span>{text}</span>}
+                    {icon && (
+                      <Icon icon={icon} className="inline-block text-lg" />
+                    )}
+                  </>
+                );
+
+                return link ? (
+                  <a
+                    key={actionIndex}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <span key={actionIndex} className={className}>
+                    {content}
+                  </span>
+                );
+              })}
+            </div>
+          )}
         </div>
       ))}
     </div>
