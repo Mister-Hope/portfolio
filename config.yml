@@ -136,6 +136,10 @@ locales:
               A Vue-powered static site generator.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:vitejs
+              - icon: logos:webpack
               - text: Website
                 link: https://vuejs.press
                 icon: external-link
@@ -148,6 +152,9 @@ locales:
             description: A collection of official VuePress plugins and themes.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
               - text: Website
                 link: https://ecosystem.vuejs.press
                 icon: external-link
@@ -160,6 +167,9 @@ locales:
             description: A VuePress theme with tons of features✨
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
               - text: Website
                 link: https://theme-hope.vuejs.press
                 icon: external-link
@@ -172,6 +182,10 @@ locales:
             description: A Simple, Safe Comment System.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
+              - icon: logos:vercel-icon
               - text: Website
                 link: https://waline.js.org
                 icon: external-link
@@ -184,6 +198,8 @@ locales:
             description: A collection of markdown-it plugins written in TypeScript.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:markdown
               - text: Website
                 link: https://mdit-plugins.github.io/
                 icon: external-link
@@ -196,6 +212,7 @@ locales:
             description: A bcrypt implementation in TypeScript.
             category: Project
             actions:
+              - icon: logos:typescript-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/bcrypt-ts
                 icon: fa7-brands:github
@@ -204,6 +221,10 @@ locales:
             description: A zero-code personal portfolio template.
             category: Project
             actions:
+              - icon: logos:react
+              - icon: logos:typescript-icon
+              - icon: logos:tailwindcss-icon
+              - icon: logos:vitejs
               - text: GitHub
                 link: https://github.com/Mister-Hope/portfolio-template
                 icon: fa7-brands:github
@@ -212,6 +233,7 @@ locales:
             description: A compact and powerful full-text search engine for browsers and Node.js.
             category: Project
             actions:
+              - icon: logos:typescript-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/slimsearch
                 icon: fa7-brands:github
@@ -220,6 +242,8 @@ locales:
             description: A chainable API tool for building and managing webpack configurations.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:webpack
               - text: GitHub
                 link: https://github.com/Mister-Hope/webpack-v5-chain
                 icon: fa7-brands:github
@@ -228,6 +252,9 @@ locales:
             description: A plugin for compiling Sass in Gulp 5.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:gulp
+              - icon: logos:sass
               - text: GitHub
                 link: https://github.com/Mister-Hope/gulp5-sass-plugin
                 icon: fa7-brands:github
@@ -236,6 +263,8 @@ locales:
             description: Create CodePen snippets via the API.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:codepen-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/create-codepen
                 icon: fa7-brands:github
@@ -244,6 +273,8 @@ locales:
             description: A Rollup plugin that parses and preserves the shebang line in entry files.
             category: Project
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:rollup
               - text: GitHub
                 link: https://github.com/Mister-Hope/rollup-plugin-resolve-shebang
                 icon: fa7-brands:github
@@ -400,6 +431,10 @@ locales:
               Vue 驱动的静态网站生成器。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:vitejs
+              - icon: logos:webpack
               - text: 网站
                 link: https://vuejs.press/zh/
                 icon: external-link
@@ -412,6 +447,9 @@ locales:
             description: VuePress 官方插件与主题集合。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
               - text: 网站
                 link: https://ecosystem.vuejs.press/zh/
                 icon: external-link
@@ -424,6 +462,9 @@ locales:
             description: 一个具有强大功能的 VuePress 主题✨
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
               - text: 网站
                 link: https://theme-hope.vuejs.press
                 icon: external-link
@@ -436,6 +477,10 @@ locales:
             description: 一款简单、安全的评论系统。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:vue
+              - icon: logos:sass
+              - icon: logos:vercel-icon
               - text: 网站
                 link: https://waline.js.org
                 icon: external-link
@@ -448,6 +493,8 @@ locales:
             description: 一组用 TypeScript 编写的 markdown-it 插件。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:markdown
               - text: 网站
                 link: https://mdit-plugins.github.io/
                 icon: external-link
@@ -461,6 +508,9 @@ locales:
             category: 项目
             description: 100万字的东师新生指南。
             actions:
+              - icon: logos:typescript-icon
+              - icon: tdesign:logo-miniprogram-filled
+              - icon: logos:yaml
               - text: 网站
                 link: https://innenu.com
                 icon: external-link
@@ -474,6 +524,8 @@ locales:
             description: 极其轻量的小程序框架
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: tdesign:logo-miniprogram-filled
               - text: 网站
                 link: https://miniapp-tool.github.io
                 icon: external-link
@@ -485,6 +537,7 @@ locales:
             description: bcrypt 的 TypeScript 实现。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/bcrypt-ts
                 icon: fa7-brands:github
@@ -493,6 +546,10 @@ locales:
             description: 零代码的个人作品集模板。
             category: 项目
             actions:
+              - icon: logos:react
+              - icon: logos:typescript-icon
+              - icon: logos:tailwindcss-icon
+              - icon: logos:vitejs
               - text: GitHub
                 link: https://github.com/Mister-Hope/portfolio-template
                 icon: fa7-brands:github
@@ -501,6 +558,7 @@ locales:
             description: 小巧且强大的浏览器与 Node.js 全文搜索引擎。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/slimsearch
                 icon: fa7-brands:github
@@ -509,6 +567,8 @@ locales:
             description: 一个用于构建和管理 webpack 配置的链式 API 工具。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:webpack
               - text: GitHub
                 link: https://github.com/Mister-Hope/webpack-v5-chain
                 icon: fa7-brands:github
@@ -517,6 +577,9 @@ locales:
             description: 一个用于在 Gulp 5 中编译 Sass 的插件。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:gulp
+              - icon: logos:sass
               - text: GitHub
                 link: https://github.com/Mister-Hope/gulp5-sass-plugin
                 icon: fa7-brands:github
@@ -525,6 +588,8 @@ locales:
             description: 通过 API 创建 CodePen 代码片段。。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:codepen-icon
               - text: GitHub
                 link: https://github.com/Mister-Hope/create-codepen
                 icon: fa7-brands:github
@@ -533,6 +598,8 @@ locales:
             description: 解析并保留入口文件中的 shebang 行的 Rollup 插件。
             category: 项目
             actions:
+              - icon: logos:typescript-icon
+              - icon: logos:rollup
               - text: GitHub
                 link: https://github.com/Mister-Hope/rollup-plugin-resolve-shebang
                 icon: fa7-brands:github
