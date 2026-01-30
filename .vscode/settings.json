@@ -1,4 +1,7 @@
 {
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.typeAware": true,
+  "oxc.unusedDisableDirectives": "deny",
   "json.schemas": [
     {
       "fileMatch": ["config.json"],
