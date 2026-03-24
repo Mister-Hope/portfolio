@@ -6,9 +6,6 @@ locales:
     langName: EN
     title: Mister-Hope | Portfolio
     description: The personal portfolio of Mister-Hope, a front-end developer and physic teacher.
-    ui:
-      themeToggle: Toggle Theme
-      contact: Contact
 
     hero:
       name: Mister-Hope
