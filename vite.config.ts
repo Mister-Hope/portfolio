@@ -1,15 +1,65 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import type { ViteDevServer } from "vite";
+import type { Plugin, ViteDevServer } from "vite";
 import { defineConfig } from "vite";
 
 import { CONFIG_FILES, getConfigDependencies, loadConfig } from "./lib/configLoader.js";
 import { ssgPlugin } from "./lib/ssgPlugin.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const injectCustomCssImportPlugin = ({
+  customCSS = "../custom.css",
+  entry = "index.css",
+} = {}): Plugin => {
+  let root = "";
+  let indexCssPath = "";
+  let customCssPath = "";
+
+  return {
+    name: "inject-custom-css",
+    enforce: "pre",
+
+    configResolved(config) {
+      ({ root } = config);
+      // 统一转换为正斜杠，防止 Windows 路径匹配失败
+      indexCssPath = path.resolve(root, entry).replaceAll("\\", "/");
+      customCssPath = path.resolve(root, customCSS).replaceAll("\\", "/");
+    },
+
+    transform(code: string, id: string): { code: string; map: null } | null {
+      const cleanId = id.split("?")[0].replaceAll("\\", "/");
+
+      if (cleanId === indexCssPath) {
+        this.addWatchFile(customCssPath);
+
+        if (fs.existsSync(customCssPath)) {
+          const relativePath = path.posix.relative(path.posix.dirname(indexCssPath), customCssPath);
+
+          return {
+            code: `${code}\n@import '${relativePath}';`,
+            map: null,
+          };
+        }
+      }
+
+      return null;
+    },
+
+    handleHotUpdate({ file, server }) {
+      const cleanFile = file.replaceAll("\\", "/");
+
+      if (cleanFile === customCssPath) {
+        const indexModules = server.moduleGraph.getModulesByFile(indexCssPath);
+        if (indexModules && indexModules.size > 0) return [...indexModules];
+      }
+    },
+  };
+};
 
 export default defineConfig(async () => {
   const config = await loadConfig(__dirname);
@@ -33,6 +83,7 @@ export default defineConfig(async () => {
     },
     plugins: [
       react(),
+      injectCustomCssImportPlugin(),
       tailwindcss(),
       ssgPlugin(__dirname),
       {

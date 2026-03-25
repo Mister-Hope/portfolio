@@ -4,22 +4,22 @@
   }
 
   .list-ol {
-    @apply list-inside list-decimal space-y-4 text-lg marker:font-black marker:text-primary-400 dark:marker:text-primary-500;
+    @apply list-decimal space-y-4 ps-6 text-lg marker:font-black marker:text-primary-400 dark:marker:text-primary-500;
   }
 
   .list-li-unordered {
-    @apply flex items-start gap-4;
+    @apply flex items-start gap-2;
   }
 
   .list-li-ordered {
-    @apply pl-2;
+    @apply ps-2;
   }
 
   .list-marker-container {
     @apply mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center transition-all;
   }
 
-  .list-marker-check {
+  .list-marker-icon {
     @apply text-lg text-primary-400 dark:text-primary-500;
   }
 
@@ -40,6 +40,6 @@
   }
 
   .list-link {
-    @apply border-b border-transparent transition-all hover:border-primary-200 hover:text-primary-600 dark:hover:text-primary-400;
+    @apply text-inherit no-underline underline-offset-2 transition-all hover:text-primary-500 hover:underline hover:decoration-2;
   }
 }
