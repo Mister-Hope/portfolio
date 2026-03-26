@@ -1,20 +1,18 @@
-# yaml-language-server: $schema=./lib/config.schema.json
-
 locales:
   /:
     lang: en-US
     langName: EN
     title: Mister-Hope | Portfolio
-    description: The personal portfolio of Mister-Hope, a front-end developer and physic teacher.
+    description: The personal portfolio of Mister-Hope, a front-end developer and physics educator.
 
     hero:
       name: Mister-Hope
-      welcome: 👋 Hi there, I am
+      welcome: 👋 Greetings, I am
       titles:
         - High School Physics Teacher
-        - Front-end Developer
-        - Open Source Contributor
-        - A Lifelong Learner
+        - Front-End Developer
+        - Open-Source Contributor
+        - Lifelong Learner
       avatar: /avatar.avif
       bgImage: /bg.avif
       medias:
@@ -96,31 +94,31 @@ locales:
             place: Northeast YuCai School, China
             time: Aug. 2025 - Present
             title: Physics Teacher, High School Department
-            content: Teaching physics for students from class 2513.
+            content: Delivering comprehensive physics instruction to Class 2513 students.
 
           - type: volunteer
             place: ChangChun, China
             time: Jan. 2025 - Jul. 2025
-            title: Full-time open source contributor
-            content: Building open source projects like [VuePress](https://vuejs.press/) and [markdown-it plugins](https://mdit-plugins.github.io/).
+            title: Full-Time Open-Source Contributor
+            content: Developing and maintaining open-source projects, including [VuePress](https://vuejs.press/) and [markdown-it plugins](https://mdit-plugins.github.io/).
 
           - type: study
-            place: Northeast Normal University, School of Physics, Chain
-            time: Sep. 2021 - Dec. 2024
-            title: Master of Science
-            content: study theoretical physics with Prof. [XueXi Yi](https://cqs.nenu.edu.cn/)
+            place: Northeast Normal University, School of Physics, China
+            time: Sept. 2021 - Dec. 2024
+            title: Master of Science, Theoretical Physics
+            content: Specialized in theoretical physics under the supervision of Prof. [XueXi Yi](https://cqs.nenu.edu.cn/).
 
           - type: volunteer
             place: AnShan, China
             time: Jul. 2020 - Aug. 2021
-            title: Full-time open source contributor
-            content: Building open source projects like [VuePress Theme Hope](https://theme-hope.vuejs.press/) and [Waline](https://waline.js.org/).
+            title: Full-Time Open-Source Contributor
+            content: Architected and developed open-source projects, including [VuePress Theme Hope](https://theme-hope.vuejs.press/) and [Waline](https://waline.js.org/).
 
           - type: study
             place: Northeast Normal University, School of Physics, China
-            time: Sep. 2016 - June 2020
+            time: Sept. 2016 - June 2020
             title: Bachelor of Science, Physics
-            content: Awarded the Principal's Scholarship.
+            content: Recipient of the Principal's Scholarship.
 
       - type: cards
         id: projects
@@ -146,7 +144,7 @@ locales:
 
           - title: VuePress Ecosystem ![Stars](https://img.shields.io/github/stars/vuepress/ecosystem?style=plastic&logo=github)
             logo: https://vuejs.press/images/hero.png
-            description: A collection of official VuePress plugins and themes.
+            description: A comprehensive collection of official VuePress plugins and themes.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -161,7 +159,7 @@ locales:
 
           - title: VuePress Theme Hope ![Stars](https://img.shields.io/github/stars/vuepress-theme-hope/vuepress-theme-hope?style=plastic&logo=github)
             logo: https://theme-hope-assets.vuejs.press/logo.svg
-            description: A VuePress theme with tons of features✨
+            description: A feature-rich and highly customizable VuePress theme.✨
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -176,7 +174,7 @@ locales:
 
           - title: Waline ![Stars](https://img.shields.io/github/stars/walinejs/waline?style=plastic&logo=github)
             logo: https://waline.js.org/logo.png
-            description: A Simple, Safe Comment System.
+            description: A lightweight and secure comment system.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -192,7 +190,7 @@ locales:
 
           - title: mdit-plugins ![Stars](https://img.shields.io/github/stars/mdit-plugins/mdit-plugins?style=plastic&logo=github)
             logo: https://mdit-plugins.github.io/logo.svg
-            description: A collection of markdown-it plugins written in TypeScript.
+            description: A robust collection of markdown-it plugins written in TypeScript.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -206,7 +204,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: bcrypt-ts
-            description: A bcrypt implementation in TypeScript.
+            description: A robust bcrypt implementation in TypeScript.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -215,7 +213,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: portfolio-template
-            description: A zero-code personal portfolio template.
+            description: A zero-code template for personal portfolios.
             category: Project
             actions:
               - icon: logos:react
@@ -227,7 +225,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: slimsearch
-            description: A compact and powerful full-text search engine for browsers and Node.js.
+            description: A compact and performant full-text search engine for browsers and Node.js.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -236,7 +234,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: webpack-v5-chain
-            description: A chainable API tool for building and managing webpack configurations.
+            description: A chainable API utility for building and managing Webpack configurations.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -246,7 +244,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: gulp5-sass-plugin
-            description: A plugin for compiling Sass in Gulp 5.
+            description: A plugin optimized for compiling Sass in Gulp 5.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -257,7 +255,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: create-codepen
-            description: Create CodePen snippets via the API.
+            description: A utility for generating CodePen snippets via API.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -267,7 +265,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: rollup-plugin-resolve-shebang
-            description: A Rollup plugin that parses and preserves the shebang line in entry files.
+            description: A Rollup plugin designed to parse and preserve shebang declarations in entry files.
             category: Project
             actions:
               - icon: logos:typescript-icon
@@ -292,20 +290,20 @@ locales:
 
     footer:
       copyright: © 2025 Mister Hope. All rights reserved.
-      description: Built with Love.
+      description: Built with passion.
 
   /zh/:
     lang: zh-CN
     langName: 中文
     title: Mister-Hope | 作品集
-    description: Mister-Hope，一名前端开发者和物理教师的个人作品集
+    description: Mister-Hope 的个人作品集——前端开发者与物理教师。
     ui:
       themeToggle: 切换主题
       contact: 联系
 
     hero:
       name: Mister-Hope
-      welcome: 👋 你好，我是
+      welcome: 👋 欢迎，我是
       titles:
         - 高中物理教师
         - 前端开发者
@@ -389,33 +387,33 @@ locales:
         data:
           - type: work
             place: 东北育才学校，中国
-            time: 2025年8月 - 现在
+            time: 2025年8月 - 至今
             title: 高中部物理教师
-            content: 任教2513班物理。
+            content: 担任 2513 班物理教学工作。
 
           - type: volunteer
             place: 长春，中国
             time: 2025年1月 - 2025年7月
             title: 全职开源贡献者
-            content: 参与构建 [VuePress](https://vuejs.press/zh/) 和 [mdit-plugins](https://mdit-plugins.github.io/zh/) 插件等开源项目。
+            content: 参与开发与维护 [VuePress](https://vuejs.press/zh/) 及 [mdit-plugins](https://mdit-plugins.github.io/zh/) 等开源项目。
 
           - type: study
             place: 东北师范大学，物理学院，中国
             time: 2021年9月 - 2024年12月
             title: 理学硕士
-            content: 在[衣学喜教授]((https://cqs.nenu.edu.cn/))指导下研究理论物理。
+            content: 师从[衣学喜教授](https://cqs.nenu.edu.cn/)，攻读理论物理方向。
 
           - type: volunteer
             place: 鞍山，中国
             time: 2020年7月 - 2021年8月
             title: 全职开源贡献者
-            content: 参与构建 [VuePress Theme Hope](https://theme-hope.vuejs.press/zh/) 和 [Waline](https://waline.js.org/zh/) 等开源项目。
+            content: 主导并参与开发 [VuePress Theme Hope](https://theme-hope.vuejs.press/zh/) 与 [Waline](https://waline.js.org/zh/) 等核心开源项目。
 
           - type: study
             place: 东北师范大学，物理学院，中国
             time: 2016年9月 - 2020年6月
             title: 理学学士
-            content: 获得校长奖学金。
+            content: 荣获校长奖学金。
 
       - type: cards
         id: projects
@@ -425,7 +423,7 @@ locales:
           - title: VuePress Core ![Stars](https://img.shields.io/github/stars/vuepress/core?style=plastic&logo=github)
             logo: https://vuejs.press/images/hero.png
             description: |-
-              Vue 驱动的静态网站生成器。
+              基于 Vue 的静态网站生成器。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -441,7 +439,7 @@ locales:
 
           - title: VuePress Ecosystem ![Stars](https://img.shields.io/github/stars/vuepress/ecosystem?style=plastic&logo=github)
             logo: https://vuejs.press/images/hero.png
-            description: VuePress 官方插件与主题集合。
+            description: VuePress 官方插件与主题生态集合。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -456,7 +454,7 @@ locales:
 
           - title: VuePress Theme Hope ![Stars](https://img.shields.io/github/stars/vuepress-theme-hope/vuepress-theme-hope?style=plastic&logo=github)
             logo: https://theme-hope-assets.vuejs.press/logo.svg
-            description: 一个具有强大功能的 VuePress 主题✨
+            description: 一款功能丰富且高度可定制的 VuePress 主题✨
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -471,7 +469,7 @@ locales:
 
           - title: Waline ![Stars](https://img.shields.io/github/stars/walinejs/waline?style=plastic&logo=github)
             logo: https://waline.js.org/logo.png
-            description: 一款简单、安全的评论系统。
+            description: 一款轻量且安全的评论系统。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -487,7 +485,7 @@ locales:
 
           - title: mdit-plugins ![Stars](https://img.shields.io/github/stars/mdit-plugins/mdit-plugins?style=plastic&logo=github)
             logo: https://mdit-plugins.github.io/logo.svg
-            description: 一组用 TypeScript 编写的 markdown-it 插件。
+            description: 基于 TypeScript 构建的 markdown-it 插件集合。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -503,7 +501,7 @@ locales:
           - title: inNENU
             logo: https://innenu.com/logo.svg
             category: 项目
-            description: 100万字的东师新生指南。
+            description: 逾百万字的东北师范大学新生指南。
             actions:
               - icon: logos:typescript-icon
               - icon: tdesign:logo-miniprogram-filled
@@ -518,7 +516,7 @@ locales:
 
           - title: mptool
             logo: https://miniapp-tool.github.io/logo.svg
-            description: 极其轻量的小程序框架
+            description: 极致轻量的小程序开发框架。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -531,7 +529,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: bcrypt-ts
-            description: bcrypt 的 TypeScript 实现。
+            description: 基于 TypeScript 的 bcrypt 算法实现。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -540,7 +538,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: portfolio-template
-            description: 零代码的个人作品集模板。
+            description: 零代码个人作品集模板。
             category: 项目
             actions:
               - icon: logos:react
@@ -552,7 +550,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: slimsearch
-            description: 小巧且强大的浏览器与 Node.js 全文搜索引擎。
+            description: 适用于浏览器与 Node.js 的轻量级高性能全文搜索引擎。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -561,7 +559,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: webpack-v5-chain
-            description: 一个用于构建和管理 webpack 配置的链式 API 工具。
+            description: 用于构建与管理 Webpack 配置的链式 API 工具。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -571,7 +569,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: gulp5-sass-plugin
-            description: 一个用于在 Gulp 5 中编译 Sass 的插件。
+            description: 适配 Gulp 5 的 Sass 编译插件。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -582,7 +580,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: create-codepen
-            description: 通过 API 创建 CodePen 代码片段。。
+            description: 基于 API 自动生成 CodePen 代码片段的工具。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -592,7 +590,7 @@ locales:
                 icon: fa7-brands:github
 
           - title: rollup-plugin-resolve-shebang
-            description: 解析并保留入口文件中的 shebang 行的 Rollup 插件。
+            description: 用于解析并保留入口文件 shebang 声明的 Rollup 插件。
             category: 项目
             actions:
               - icon: logos:typescript-icon
@@ -612,16 +610,16 @@ locales:
               DOI: <https://doi.org/10.1103/PhysRevA.111.063702>
             actions:
               - text: 阅读全文
-                link: https://drive.mister-hope.com/public/files/PhysRevA.111.063702.pdf
+                link: https://drive.mister-hope.com/PhysRevA.111.063702.pdf
                 icon: external-link
 
-          - title: 非厄米光学系统的调控和动力学
+          - title: 非厄米光学系统的调控与动力学演化
             category: 硕士学位论文
             actions:
               - text: 阅读全文
-                link: https://drive.mister-hope.com/public/files/%E7%A1%95%E5%A3%AB%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87.pdf
+                link: https://drive.mister-hope.com/%E7%A1%95%E5%A3%AB%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87.pdf
                 icon: external-link
 
     footer:
-      copyright: © 2025 Mister Hope。保留所有权利。
-      description: 用爱构建。
+      copyright: Copyright © 2025-$year Mister Hope. 保留所有权利。
+      description: 秉持热爱，用心构建。
