@@ -27,7 +27,7 @@ git clone https://github.com/your-username/your-repository.git
 cd your-repository
 
 # Install dependencies
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 ### 2. Configuration
@@ -56,7 +56,7 @@ Detailed guides on how to configure every section:
 ### 3. Run Locally
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
 Open <http://localhost:3000> to see your changes instantly.
@@ -68,7 +68,7 @@ Open <http://localhost:3000> to see your changes instantly.
 To build for production:
 
 ```bash
-pnpm build
+pnpm run build
 ```
 
 The output will be in the `dist/` folder, ready to be deployed to GitHub Pages, Vercel, or Netlify.
