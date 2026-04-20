@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -26,6 +26,20 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Copy Config
+        run: |
+          has_config=false
+          for f in config.ts config.js config.json config.yml config.yaml; do
+            [ -f "$f" ] && has_config=true && break
+          done
+          if [ "$has_config" = "false" ]; then
+            if [ -f "examples/config.example.yaml" ]; then
+              cp examples/config.example.yaml config.yaml
+            elif [ -f "examples/config.example.yml" ]; then
+              cp examples/config.example.yml config.yml
+            fi
+          fi
 
       - name: Build Docs
         run: |-

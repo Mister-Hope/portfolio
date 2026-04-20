@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -28,5 +28,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Copy Config
+        if: github.repository == 'Mister-Hope/portfolio-template'
+        run: |-
+          cp examples/config.example.yml config.yml
+
       - name: Build Docs
-        run: pnpm run build
+        run: |-
+          pnpm run build
