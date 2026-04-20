@@ -5,31 +5,37 @@ import { Icon } from "./Icon.js";
 
 /**
  * Gallery item for photos
+ *
  * 照片画廊项
  */
 export interface GalleryItem {
   /**
    * Image URL
+   *
    * 图片链接
    */
   url: string;
   /**
    * Image title
+   *
    * 图片标题
    */
   title: string;
   /**
    * Location where photo was taken
+   *
    * 拍摄地点
    */
   location?: string;
   /**
    * Date of the photo
+   *
    * 拍摄日期
    */
   date?: string | number;
   /**
    * Description or story (Markdown supported)
+   *
    * 描述或故事 (支持 Markdown)
    */
   description?: string;
@@ -38,6 +44,7 @@ export interface GalleryItem {
 export interface GalleryProps {
   /**
    * List of gallery items (photos)
+   *
    * 画廊项 (照片) 列表
    */
   items: GalleryItem[];
@@ -55,7 +62,12 @@ export const GalleryCard: FC<{
   const hasMeta = Boolean(item.location) || Boolean(item.date);
 
   return (
-    <div className="group gallery-item" onClick={handleSelect}>
+    <button
+      type="button"
+      className="group gallery-item"
+      onClick={handleSelect}
+      aria-label={item.title}
+    >
       <img src={item.url} alt={item.title} className="gallery-image" loading="lazy" />
       <div className="gallery-overlay">
         <h4 className="gallery-title">{item.title}</h4>
@@ -72,6 +84,6 @@ export const GalleryCard: FC<{
           </p>
         )}
       </div>
-    </div>
+    </button>
   );
 };

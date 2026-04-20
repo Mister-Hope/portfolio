@@ -8,16 +8,19 @@ import { Typewriter } from "./Typewriter.js";
 
 /**
  * Props for the PortfolioHeader component
+ *
  * PortfolioHeader 组件的属性
  */
 interface Props {
   /**
    * Configuration object containing user details
+   *
    * 包含用户详细信息的配置对象
    */
   hero: HeroConfig;
   /**
    * Current locale
+   *
    * 当前语言
    */
   locale?: string;
@@ -107,9 +110,14 @@ export const Hero: FC<Props> = ({ hero, locale }) => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="hero-scroll-indicator" onClick={handleScroll}>
+      <button
+        type="button"
+        className="hero-scroll-indicator"
+        onClick={handleScroll}
+        aria-label="Scroll to content"
+      >
         <Icon icon="chevron-down" className="text-3xl text-white" />
-      </div>
+      </button>
     </header>
   );
 };

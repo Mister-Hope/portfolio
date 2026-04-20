@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mister-Hope/portfolio.git"
+    "url": "https://github.com/Mister-Hope/portfolio-template.git"
   },
   "type": "module",
   "scripts": {
@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
     "@mr-hope/tsconfig": "0.0.3",
@@ -43,7 +43,7 @@
     "tailwindcss": "^4.2.2",
     "typescript": "~6.0.2",
     "unrun": "^0.2.34",
-    "vite": "^8.0.3"
+    "vite": "^8.0.8"
   },
   "nano-staged": {
     "**/*": "oxfmt --no-error-on-unmatched-pattern",
