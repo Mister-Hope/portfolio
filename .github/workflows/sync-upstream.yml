@@ -47,7 +47,7 @@ jobs:
             [ -f "$f" ] && cp "$f" /tmp/user-files/ || true
           done
 
-          # Save package.json name, description, and version
+          # Save package.json name, description, version, author, repository, and extra deps
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
@@ -55,6 +55,10 @@ jobs:
             if (pkg.name !== undefined) meta.name = pkg.name;
             if (pkg.description !== undefined) meta.description = pkg.description;
             if (pkg.version !== undefined) meta.version = pkg.version;
+            if (pkg.author !== undefined) meta.author = pkg.author;
+            if (pkg.repository !== undefined) meta.repository = pkg.repository;
+            if (pkg.dependencies !== undefined) meta.dependencies = pkg.dependencies;
+            if (pkg.devDependencies !== undefined) meta.devDependencies = pkg.devDependencies;
             fs.writeFileSync('/tmp/user-files/pkg-meta.json', JSON.stringify(meta, null, 2));
           "
 
@@ -104,7 +108,7 @@ jobs:
           done
           shopt -u nullglob
 
-          # Merge package.json name, description, version back
+          # Merge package.json name, description, version, author, repository, and extra deps back
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
@@ -112,6 +116,25 @@ jobs:
             if (meta.name !== undefined) pkg.name = meta.name;
             if (meta.description !== undefined) pkg.description = meta.description;
             if (meta.version !== undefined) pkg.version = meta.version;
+            if (meta.author !== undefined) pkg.author = meta.author;
+            if (meta.repository !== undefined) pkg.repository = meta.repository;
+            // Preserve user's extra dependencies that don't exist in upstream
+            if (meta.dependencies) {
+              pkg.dependencies = pkg.dependencies || {};
+              for (const [key, value] of Object.entries(meta.dependencies)) {
+                if (!(key in pkg.dependencies)) {
+                  pkg.dependencies[key] = value;
+                }
+              }
+            }
+            if (meta.devDependencies) {
+              pkg.devDependencies = pkg.devDependencies || {};
+              for (const [key, value] of Object.entries(meta.devDependencies)) {
+                if (!(key in pkg.devDependencies)) {
+                  pkg.devDependencies[key] = value;
+                }
+              }
+            }
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
           "
 
@@ -160,7 +183,7 @@ jobs:
                     '- `custom.css` (if present)',
                     '- `public/` folder',
                     '- `README.md` and `README-*.md`',
-                    '- `package.json` `name`, `description`, `version`',
+                    '- `package.json` `name`, `description`, `version`, `author`, `repository`, and extra dependencies',
                   ].join('\n'),
                 });
               } catch (err) {
