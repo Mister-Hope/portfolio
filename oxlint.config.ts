@@ -11,7 +11,9 @@ export default defineHopeConfig(
     rules: {
       // project settings
       "max-statements": ["warn", 30],
+      "no-underscore-dangle": ["warn", { allow: ["__CONFIG__", "__dirname", "__filename"] }],
       "max-lines-per-function": ["warn", { max: 200, skipBlankLines: true, skipComments: true }],
+      "react/forbid-component-props": "off",
       "unicorn/prefer-global-this": "off",
     },
   },
