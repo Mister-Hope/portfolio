@@ -62,6 +62,12 @@ jobs:
             fs.writeFileSync('/tmp/user-files/pkg-meta.json', JSON.stringify(meta, null, 2));
           "
 
+          # Save .github/workflows/ to preserve permissions and customizations
+          if [ -d ".github/workflows" ]; then
+            mkdir -p /tmp/user-files/workflows
+            cp -r .github/workflows/* /tmp/user-files/workflows/
+          fi
+
           # Record whether the examples folder exists
           [ -d "examples" ] && echo "true" > /tmp/user-files/has-examples || echo "false" > /tmp/user-files/has-examples
 
@@ -98,6 +104,13 @@ jobs:
           if [ -d "/tmp/user-files/public" ]; then
             rm -rf public
             cp -r "/tmp/user-files/public" .
+          fi
+
+          # Restore .github/workflows/ to preserve permissions and customizations
+          if [ -d "/tmp/user-files/workflows" ]; then
+            rm -rf .github/workflows
+            mkdir -p .github/workflows
+            cp -r /tmp/user-files/workflows/* .github/workflows/
           fi
 
           # Restore README files
@@ -184,6 +197,7 @@ jobs:
                     '- `public/` folder',
                     '- `README.md` and `README-*.md`',
                     '- `package.json` `name`, `description`, `version`, `author`, `repository`, and extra dependencies',
+                    '- `.github/workflows/` (preserves permissions and customizations)',
                   ].join('\n'),
                 });
               } catch (err) {
