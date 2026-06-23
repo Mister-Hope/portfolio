@@ -21,6 +21,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm ci
+
       - name: Setup Git
         run: |
           git config user.name "github-actions[bot]"
@@ -41,11 +52,19 @@ jobs:
           # Save public folder
           [ -d "public" ] && cp -r "public" /tmp/user-files/ || true
 
-          # Save README.md and README-*.md
+          # Save README.md and README-*.md / README.*.md
+          # Also record the exact list of localized readme files, so we don't
+          # resurrect upstream readme files the user intentionally deleted.
           [ -f "README.md" ] && cp "README.md" /tmp/user-files/ || true
-          for f in README-*.md; do
-            [ -f "$f" ] && cp "$f" /tmp/user-files/ || true
-          done
+          {
+            ls README-*.md 2>/dev/null || true
+            ls README.*.md 2>/dev/null || true
+          } > /tmp/user-files/readme-list.txt
+          if [ -s "/tmp/user-files/readme-list.txt" ]; then
+            while IFS= read -r f; do
+              [ -n "$f" ] && cp "$f" /tmp/user-files/
+            done < /tmp/user-files/readme-list.txt
+          fi
 
           # Save package.json name, description, version, author, repository, and extra deps
           node -e "
@@ -62,12 +81,6 @@ jobs:
             fs.writeFileSync('/tmp/user-files/pkg-meta.json', JSON.stringify(meta, null, 2));
           "
 
-          # Save .github/workflows/ to preserve permissions and customizations
-          if [ -d ".github/workflows" ]; then
-            mkdir -p /tmp/user-files/workflows
-            cp -r .github/workflows/* /tmp/user-files/workflows/
-          fi
-
           # Record whether the examples folder exists
           [ -d "examples" ] && echo "true" > /tmp/user-files/has-examples || echo "false" > /tmp/user-files/has-examples
 
@@ -83,6 +96,11 @@ jobs:
           # makes the resulting commit a valid PR target against main.
           git checkout -B sync-upstream origin/main
           git read-tree -u --reset upstream/main
+
+          # Restore the user's .github/workflows/ so the push does not require
+          # the `workflows` permission (GitHub Apps cannot update workflow files
+          # without it). Users must sync workflow files manually.
+          git checkout origin/main -- .github/workflows/ 2>/dev/null || true
 
       - name: Remove examples if user had deleted it
         run: |
@@ -106,20 +124,16 @@ jobs:
             cp -r "/tmp/user-files/public" .
           fi
 
-          # Restore .github/workflows/ to preserve permissions and customizations
-          if [ -d "/tmp/user-files/workflows" ]; then
-            rm -rf .github/workflows
-            mkdir -p .github/workflows
-            cp -r /tmp/user-files/workflows/* .github/workflows/
-          fi
-
           # Restore README files
+          # Only restore localized readme files the user had; don't bring back
+          # upstream readme files the user intentionally deleted.
+          rm -f README.md README-*.md README.*.md
           [ -f "/tmp/user-files/README.md" ] && cp "/tmp/user-files/README.md" . || true
-          shopt -s nullglob
-          for f in /tmp/user-files/README-*.md; do
-            cp "$f" .
-          done
-          shopt -u nullglob
+          if [ -s "/tmp/user-files/readme-list.txt" ]; then
+            while IFS= read -r f; do
+              [ -n "$f" ] && cp "/tmp/user-files/$f" . || true
+            done < /tmp/user-files/readme-list.txt
+          fi
 
           # Merge package.json name, description, version, author, repository, and extra deps back
           node -e "
@@ -150,6 +164,12 @@ jobs:
             }
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
           "
+
+      - name: Update lockfile
+        run: pnpm install --lockfile-only
+
+      - name: Format
+        run: pnpm dlx oxfmt
 
       - name: Commit changes
         id: commit
@@ -195,9 +215,15 @@ jobs:
                     '- Config files (`config.ts` / `config.js` / `config.json` / `config.yml` / `config.yaml`)',
                     '- `custom.css` (if present)',
                     '- `public/` folder',
-                    '- `README.md` and `README-*.md`',
+                    '- `README.md` and localized `README-*.md` / `README.*.md`',
                     '- `package.json` `name`, `description`, `version`, `author`, `repository`, and extra dependencies',
-                    '- `.github/workflows/` (preserves permissions and customizations)',
+                    '- `.github/workflows/` (see note below)',
+                    '',
+                    '> [!NOTE]',
+                    '> **Workflow files are not updated automatically.**',
+                    '> GitHub Apps cannot push changes to `.github/workflows/` without the `workflows` permission.',
+                    '> Please manually review and apply any upstream workflow changes by comparing:',
+                    '> <https://github.com/Mister-Hope/portfolio-template/tree/main/.github/workflows>',
                   ].join('\n'),
                 });
               } catch (err) {
