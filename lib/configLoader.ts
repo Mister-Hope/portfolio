@@ -13,11 +13,13 @@ const require = createRequire(import.meta.url);
 
 export const CONFIG_FILES = ["config.ts", "config.js", "config.yml", "config.yaml", "config.json"];
 
-const IMPORT_REG = /(?:import|export)(?:[\s\S]*?from\s+|\s+)['"](\.[^'"]+)['"]/gu;
-
 const getImports = (filePath: string): string[] => {
   const content = fs.readFileSync(filePath, "utf-8");
-  const imports = [...content.matchAll(IMPORT_REG)].map(([, name]) => name);
+  const imports: string[] = [];
+  const regex = /(?:import|export)(?:[\s\S]*?from\s+|\s+)['"](?<path>\.[^'"]+)['"]/gu;
+  let match;
+
+  while ((match = regex.exec(content)) != null) imports.push(match[1]);
 
   return imports;
 };
@@ -70,7 +72,7 @@ export const getConfigDependencies = (root: string): string[] => {
     dependencies.add(currentFile);
 
     // Only parse JS/TS files
-    if (!/\.(js|ts|jsx|tsx|mjs|cjs)$/u.test(currentFile)) continue;
+    if (!/\.(?:js|ts|jsx|tsx|mjs|cjs)$/u.test(currentFile)) continue;
 
     try {
       const imports = getImports(currentFile);
