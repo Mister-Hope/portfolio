@@ -307,7 +307,7 @@ importers:
         version: 0.0.4(typescript@6.0.3)
       '@tailwindcss/vite':
         specifier: ^4.3.1
-        version: 4.3.2(vite@8.1.3(@types/node@24.13.2)(jiti@2.7.0))
+        version: 4.3.2(vite@8.1.3(@types/node@24.13.3)(jiti@2.7.0))
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -315,8 +315,8 @@ importers:
         specifier: ^14.1.2
         version: 14.1.2
       '@types/node':
-        specifier: 24.13.2
-        version: 24.13.2
+        specifier: 24.13.3
+        version: 24.13.3
       '@types/react':
         specifier: ^19.2.17
         version: 19.2.17
@@ -325,7 +325,7 @@ importers:
         version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
         specifier: ^6.0.2
-        version: 6.0.3(vite@8.1.3(@types/node@24.13.2)(jiti@2.7.0))
+        version: 6.0.3(vite@8.1.3(@types/node@24.13.3)(jiti@2.7.0))
       js-yaml:
         specifier: ^5.0.0
         version: 5.2.1
@@ -361,7 +361,7 @@ importers:
         version: 0.3.1
       vite:
         specifier: ^8.0.16
-        version: 8.1.3(@types/node@24.13.2)(jiti@2.7.0)
+        version: 8.1.3(@types/node@24.13.3)(jiti@2.7.0)
 
 packages:
 
@@ -1007,8 +1007,8 @@ packages:
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
 
-  '@types/node@24.13.2':
-    resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
+  '@types/node@24.13.3':
+    resolution: {integrity: sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -1745,12 +1745,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.2
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.2
 
-  '@tailwindcss/vite@4.3.2(vite@8.1.3(@types/node@24.13.2)(jiti@2.7.0))':
+  '@tailwindcss/vite@4.3.2(vite@8.1.3(@types/node@24.13.3)(jiti@2.7.0))':
     dependencies:
       '@tailwindcss/node': 4.3.2
       '@tailwindcss/oxide': 4.3.2
       tailwindcss: 4.3.2
-      vite: 8.1.3(@types/node@24.13.2)(jiti@2.7.0)
+      vite: 8.1.3(@types/node@24.13.3)(jiti@2.7.0)
 
   '@tybys/wasm-util@0.10.2':
     dependencies:
@@ -1773,7 +1773,7 @@ snapshots:
 
   '@types/mdurl@2.0.0': {}
 
-  '@types/node@24.13.2':
+  '@types/node@24.13.3':
     dependencies:
       undici-types: 7.18.2
 
@@ -1785,10 +1785,10 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@vitejs/plugin-react@6.0.3(vite@8.1.3(@types/node@24.13.2)(jiti@2.7.0))':
+  '@vitejs/plugin-react@6.0.3(vite@8.1.3(@types/node@24.13.3)(jiti@2.7.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.3(@types/node@24.13.2)(jiti@2.7.0)
+      vite: 8.1.3(@types/node@24.13.3)(jiti@2.7.0)
 
   argparse@2.0.1: {}
 
@@ -2073,7 +2073,7 @@ snapshots:
     dependencies:
       rolldown: 1.1.1
 
-  vite@8.1.3(@types/node@24.13.2)(jiti@2.7.0):
+  vite@8.1.3(@types/node@24.13.3)(jiti@2.7.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.5
@@ -2081,6 +2081,6 @@ snapshots:
       rolldown: 1.1.4
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 24.13.2
+      '@types/node': 24.13.3
       fsevents: 2.3.3
       jiti: 2.7.0
