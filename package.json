@@ -35,7 +35,7 @@
     "js-yaml": "^5.0.0",
     "markdown-it": "^14.2.0",
     "nano-staged": "1.0.2",
-    "oxc-config-hope": "0.3.12",
+    "oxc-config-hope": "0.3.13",
     "oxfmt": "0.62.0",
     "oxlint": "1.72.0",
     "oxlint-tsgolint": "7.0.2001",
