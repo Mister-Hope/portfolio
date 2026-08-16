@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -9,7 +10,8 @@ import { defineConfig } from "vite";
 import { CONFIG_FILES, getConfigDependencies, loadConfig } from "./lib/configLoader.js";
 import { ssgPlugin } from "./lib/ssgPlugin.js";
 
-const __dirname = import.meta.dirname;
+// oxlint-disable-next-line unicorn/prefer-import-meta-properties -- `import.meta.dirname` resolves to Vite's temp bundle dir (`node_modules/.vite-temp`), not the project root. `import.meta.url` is rewritten by Vite to the original config file URL, so this is the only reliable way to get the root.
+const rootDir = fileURLToPath(new URL(".", import.meta.url));
 
 const injectCustomCssImportPlugin = ({
   customCSS = "../custom.css",
@@ -25,7 +27,6 @@ const injectCustomCssImportPlugin = ({
 
     configResolved(config) {
       ({ root } = config);
-      // 统一转换为正斜杠，防止 Windows 路径匹配失败
       indexCssPath = path.resolve(root, entry).replaceAll("\\", "/");
       customCssPath = path.resolve(root, customCSS).replaceAll("\\", "/");
     },
@@ -62,17 +63,17 @@ const injectCustomCssImportPlugin = ({
 };
 
 export default defineConfig(async () => {
-  const config = await loadConfig(__dirname);
+  const config = await loadConfig(rootDir);
 
   return {
-    root: path.resolve(__dirname, "src"),
+    root: path.resolve(rootDir, "src"),
 
     build: {
-      outDir: path.resolve(__dirname, "dist"),
+      outDir: path.resolve(rootDir, "dist"),
       emptyOutDir: true,
     },
 
-    publicDir: path.resolve(__dirname, "public"),
+    publicDir: path.resolve(rootDir, "public"),
 
     define: {
       __CONFIG__: JSON.stringify(config),
@@ -85,7 +86,7 @@ export default defineConfig(async () => {
       react(),
       injectCustomCssImportPlugin(),
       tailwindcss(),
-      ssgPlugin(__dirname),
+      ssgPlugin(rootDir),
       {
         name: "inject-title-and-meta",
         transformIndexHtml(html: string): string {
@@ -105,17 +106,17 @@ export default defineConfig(async () => {
       {
         name: "watch-config",
         configureServer(server: ViteDevServer): void {
-          const configPath = path.resolve(__dirname, "config");
-          const configDependencies = getConfigDependencies(__dirname);
+          const configPath = path.resolve(rootDir, "config");
+          const configDependencies = getConfigDependencies(rootDir);
 
           server.watcher.add(configPath);
-          server.watcher.add(CONFIG_FILES.map((filePath) => path.resolve(__dirname, filePath)));
+          server.watcher.add(CONFIG_FILES.map((filePath) => path.resolve(rootDir, filePath)));
           server.watcher.add(configDependencies);
 
           server.watcher.on("change", (file: string) => {
             if (
               file.startsWith(configPath) ||
-              CONFIG_FILES.some((filePath) => file === path.resolve(__dirname, filePath)) ||
+              CONFIG_FILES.some((filePath) => file === path.resolve(rootDir, filePath)) ||
               configDependencies.includes(file)
             )
               void server.restart();
@@ -125,7 +126,7 @@ export default defineConfig(async () => {
     ],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "."),
+        "@": path.resolve(rootDir, "."),
       },
     },
   };
