@@ -19,9 +19,7 @@ jobs:
         uses: pnpm/setup@v3
         with:
           runtime: node@^24.20.0
-
-      - name: Install Dependencies
-        run: pnpm ci
+          require-lockfile: true
 
       - name: Copy Config
         run: |
