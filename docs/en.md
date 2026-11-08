@@ -13,9 +13,25 @@ Supported configuration formats: `config.ts`, `config.js`, `config.json`, `confi
 
 The configuration file exports a `Config` object by default, containing the following fields:
 
+- `base`:
+  - Type: String (optional)
+  - Details: Deployment base path. Keep `"/"` when the site is served from a domain root (e.g. Netlify, Vercel or a custom domain). Set it to the sub-path (e.g. `"/my-repository/"`) when deploying to a GitHub Pages project site or any other non-root path. See [Deployment and base path](#deployment-and-base-path).
+
+- `siteUrl`:
+  - Type: String (optional)
+  - Details: Public site URL (including the base path for sub-path deployments, e.g. `"https://<user>.github.io/<repository>"`). When set, the build emits `canonical`, `hreflang`, Open Graph/Twitter tags plus `sitemap.xml` and `robots.txt`. See [Deployment and base path](#deployment-and-base-path).
+
+- `favicon`:
+  - Type: String (optional)
+  - Details: Favicon URL or `public/` path. Defaults to `"/favicon.svg"` (shipped in `public/`). Set it to `""` to disable the icon tag.
+
+- `ogImage`:
+  - Type: String (optional)
+  - Details: Social preview image URL or `public/` path, used for `og:image`/`twitter:image`. A 1200×630 PNG/JPEG is recommended — AVIF is not supported by all social crawlers. Defaults to the hero avatar.
+
 - `locales`:
   - Type: `Record<string, LocaleConfig>`
-  - Details: Multi-language configuration map. Keys are path prefixes (e.g., `"/"`, `"/zh/"`), and values are `LocaleConfig` object
+  - Details: Multi-language configuration map. Keys are path prefixes (e.g., `"/"`, `"/zh/"`), and values are `LocaleConfig` object. A root locale with the key `"/"` is required.
 
 - `config`：
   - Type: `GlobalConfig` (optional)
@@ -119,7 +135,7 @@ The optional `config` object contains the following fields:
       - Details: Label for the contact section.
     - `details`:
       - Type: String
-      - Details: Label for the detail link.
+      - Details: Label for the detail link (optional).
 
 ## Hero Section (`hero`)
 
@@ -157,7 +173,7 @@ The optional `config` object contains the following fields:
         - Type: String
         - Details: Display name for the media item.
       - `link`:
-        - Type: String
+        - Type: String (optional)
         - Details: URL for the media item.
 
 ## Navigation Bar (`navbar`)
@@ -187,16 +203,16 @@ The optional `config` object contains the following fields:
     - Details: Component identifier (e.g., 'profile', 'experience', 'cards').
 
   - `id`:
-    - Type: String
+    - Type: String (optional)
     - Details: Unique id used for navigation anchors.
 
   - `title`:
-    - Type: String
+    - Type: String (optional)
     - Details: Section heading shown on the page.
 
   - `icon`:
     - Type: String (optional)
-    - Details: Icon class for the section header.
+    - Details: Iconify or FontAwesome icon name for the section header (e.g. 'user-tie' or 'mdi:github').
 
   - `data`:
     - Type: Any
@@ -250,7 +266,7 @@ The optional `config` object contains the following fields:
     - Item schema (ExperienceItem):
       - `type`:
         - Type: String
-        - Details: Experience category (built-in 'study' | 'work' | 'volunteer', or custom).
+        - Details: Experience category (built-in 'study' | 'work' | 'volunteer' | 'project' | 'vacation', or custom).
       - `place`:
         - Type: String
         - Details: Institution or company name.
@@ -323,6 +339,13 @@ The optional `config` object contains the following fields:
         - Type: String (optional)
         - Details: Link label to show.
 
+  - `ui`:
+    - Type: Object (optional)
+    - Details: Section-level UI overrides.
+      - `details`:
+        - Type: String (optional)
+        - Details: Label for the detail link; overrides the locale-level `ui.details`.
+
 - `cards` (type: `cards`):
   - Type: Component
   - Details: Grid layout for project or work cards.
@@ -345,7 +368,7 @@ The optional `config` object contains the following fields:
         - Type: `Array<CardAction>` (optional)
         - Details: Action buttons
           - `text`:
-            - Type: String
+            - Type: String (optional)
             - Details: Button label.
           - `link`:
             - Type: String (optional)
@@ -374,6 +397,9 @@ The optional `config` object contains the following fields:
         - `link`:
           - Type: String (optional)
           - Details: Optional URL for the list item.
+        - `icon`:
+          - Type: String (optional)
+          - Details: Optional icon name that replaces the marker for this item.
 
 - `gallery` (type: `gallery`):
   - Type: Component
@@ -396,10 +422,16 @@ The optional `config` object contains the following fields:
       - `description`:
         - Type: String (optional)
         - Details: Long-form story (markdown supported).
+      - `width`:
+        - Type: Number (optional)
+        - Details: Intrinsic image width in pixels. Set it together with `height` to reserve space and avoid layout shift.
+      - `height`:
+        - Type: Number (optional)
+        - Details: Intrinsic image height in pixels.
 
 - `markdown` (type: `markdown`):
   - Type: Component
-  - Details: Simple Markdown/HTML content block.
+  - Details: Simple Markdown/HTML content block. Raw HTML is rendered as-is: the configuration file is trusted content.
 
   - `data`:
     - `content`:
@@ -416,7 +448,7 @@ The optional `config` object contains the following fields:
   - Details: Footer configuration for the locale.
 
   - `copyright`:
-    - Type: String
+    - Type: String (optional)
     - Details: Copyright text. Use `$year` to dynamically insert the current year.
   - `description`:
     - Type: String (optional)
@@ -445,3 +477,27 @@ Create a `custom.css` file in the project root directory. It will be **automatic
   font-size: 2rem;
 }
 ```
+
+## Deployment and base path
+
+By default the template assumes the site is served from the **root of a domain** (e.g. `https://example.com/`), which is the case for Netlify, Vercel and custom domains. In that case leave `base` as `"/"`.
+
+Some hosts serve the site from a **sub-path** instead — most commonly a GitHub Pages project site at `https://<user>.github.io/<repository>/`. In that case set the top-level `base` option in your config file to that path:
+
+```yaml
+base: /your-repository/
+```
+
+The value is passed to Vite as the build base, and the template uses it for:
+
+- the built JS/CSS/`public/` asset URLs,
+- language links and the client-side language detection (`/zh/` becomes `/your-repository/zh/`),
+- image paths coming from the config (e.g. `avatar: "/avatar.avif"`).
+
+`base` must be a path starting and ending with `/` (not a full URL). When using the `pnpm run build` script, it can also be provided from the CLI without editing the config: `pnpm run build --base /your-repository/`.
+
+Separately, set `siteUrl` to the public URL of the site (include the base path when deploying under a sub-path). Canonical/hreflang links, Open Graph/Twitter tags, `sitemap.xml` and `robots.txt` are generated automatically once it is set.
+
+The repository also ships `lib/config.schema.json`; `.vscode/settings.json` wires it up so `config.json`, `config.yml` and `config.yaml` get validation and autocomplete in VS Code.
+
+The build also writes a base-aware `404.html` (served by GitHub Pages and Netlify for unknown paths). For social previews, set `ogImage` to a 1200×630 PNG/JPEG: some crawlers ignore AVIF images.

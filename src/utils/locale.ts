@@ -1,4 +1,5 @@
 import { localePaths, locales } from "../config.js";
+import { stripBase } from "./base.js";
 import { isSSR } from "./isSSR.js";
 
 const sortedPaths = [...localePaths].sort((a, b) => b.length - a.length);
@@ -16,12 +17,12 @@ export const getBrowserLanguage = (): string | null => {
     }
   }
 
-  // Second pass: lang-only match for all browser languages
+  // Second pass: primary subtag match on both sides (e.g. browser "zh" ↔ config "zh-CN")
   for (const browserLang of browserLangs) {
     const browserLangOnly = browserLang.split("-")[0].toLowerCase();
     for (const localePath of sortedPaths) {
       const localeLang = locales[localePath]?.lang?.toLowerCase();
-      if (localeLang && browserLangOnly === localeLang) return localePath;
+      if (localeLang && browserLangOnly === localeLang.split("-")[0]) return localePath;
     }
   }
 
@@ -31,7 +32,7 @@ export const getBrowserLanguage = (): string | null => {
 export const getLocaleFromPath = (): string => {
   if (isSSR) return "/";
 
-  const path = window.location.pathname;
+  const path = stripBase(window.location.pathname);
 
   for (const localePath of sortedPaths) if (path.startsWith(localePath)) return localePath;
 

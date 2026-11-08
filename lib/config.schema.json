@@ -22,7 +22,7 @@
                 "type": "array",
                 "minItems": 1,
                 "maxItems": 2,
-                "prefixItems": [
+                "items": [
                   {
                     "type": "string",
                     "description": "Plugin package name / 插件包名"
@@ -39,15 +39,35 @@
       },
       "additionalProperties": false
     },
+    "base": {
+      "type": "string",
+      "description": "Deployment base path. Keep \"/\" when the site is served from a domain root. Set it to the sub-path (e.g. \"/my-repository/\") when deploying to GitHub Pages project sites or any non-root path.\n部署基础路径。站点部署在域名根路径时保持 \"/\"；部署到 GitHub Pages 项目页等子路径时设置为该子路径（例如 \"/my-repository/\"）。"
+    },
+    "$schema": {
+      "type": "string",
+      "description": "Editor-only JSON Schema reference, e.g. \"./lib/config.schema.json\".\n仅用于编辑器校验的 JSON Schema 引用，例如 \"./lib/config.schema.json\"。"
+    },
+    "siteUrl": {
+      "type": "string",
+      "description": "Public site URL used for canonical/hreflang/sitemap/Open Graph tags, e.g. \"https://example.com\". Include the deployment base path when the site is served from a sub-path (e.g. \"https://<user>.github.io/<repository>\"). Absolute URLs are only generated when this is set.\n站点公开 URL，用于 canonical/hreflang/sitemap/Open Graph 等绝对链接（例如 \"https://example.com\"）。部署在子路径时需包含 base 路径。未设置时不生成绝对链接。"
+    },
+    "favicon": {
+      "type": "string",
+      "description": "Favicon URL or public path. Defaults to \"/favicon.svg\"; set it to an empty string to disable the icon tag.\n网站图标 URL 或 public 路径。默认 \"/favicon.svg\"；设为空字符串可禁用该标签。"
+    },
+    "ogImage": {
+      "type": "string",
+      "description": "Social preview image URL or public path, used for og:image/twitter:image. A 1200x630 PNG/JPEG is recommended (AVIF is not supported by all social crawlers). Defaults to the hero avatar.\n社交分享图 URL 或 public 路径，用于 og:image/twitter:image。建议 1200x630 的 PNG/JPEG（部分社交爬虫不支持 AVIF）。默认回退到头像。"
+    },
     "locales": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/LocaleConfig"
       },
       "description": "Multi-language configuration map. Keys are path prefixes (e.g., \"/\", \"/zh/\")\n多语言配置映射。键是路径前缀 (例如 \"/\", \"/zh/\")"
-    },
-    "additionalProperties": false
+    }
   },
+  "additionalProperties": false,
   "required": ["locales"],
   "definitions": {
     "AdaptiveImage": {
@@ -260,7 +280,6 @@
           "description": "Optional footer description\n可选页脚描述"
         }
       },
-      "required": ["copyright"],
       "description": "Footer configuration\n页脚配置",
       "additionalProperties": false
     },
@@ -562,6 +581,17 @@
               "items": {
                 "$ref": "#/definitions/TimelineItem"
               }
+            },
+            "ui": {
+              "type": "object",
+              "properties": {
+                "details": {
+                  "type": "string",
+                  "description": "Label for the detail link, overrides locale-level ui.details\n详情链接标签，覆盖 locale 级 ui.details"
+                }
+              },
+              "additionalProperties": false,
+              "description": "Section-level UI overrides\n章节级 UI 覆盖"
             }
           },
           "required": ["type", "data"]
@@ -769,6 +799,14 @@
         "description": {
           "type": "string",
           "description": "Description or story (Markdown supported)\n描述或故事 (支持 Markdown)"
+        },
+        "width": {
+          "type": "number",
+          "description": "Intrinsic image width in pixels. Set it together with height to reserve space and avoid layout shift.\n图片原始宽度（像素）。与 height 一起设置可预留空间、避免布局抖动。"
+        },
+        "height": {
+          "type": "number",
+          "description": "Intrinsic image height in pixels. Set it together with width to reserve space and avoid layout shift.\n图片原始高度（像素）。与 width 一起设置可预留空间、避免布局抖动。"
         }
       },
       "required": ["url", "title"],

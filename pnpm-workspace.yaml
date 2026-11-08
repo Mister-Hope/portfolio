@@ -1,5 +1,8 @@
 virtualStoreType: global
 
+# Supply-chain cooldown: do not install packages published less than a day ago.
+minimumReleaseAge: 1440
+
 minimumReleaseAgeExclude:
   - "@mdit/*"
   - "@mr-hope/*"
@@ -7,12 +10,10 @@ minimumReleaseAgeExclude:
   - "@oxlint/*"
   - "@vitest/*"
   - "@vue/*"
-  - "oxc-config-hope"
-  - "oxfmt"
-  - "oxlint"
-
-trustPolicy: no-downgrade
-
+  - oxc-config-hope
+  - oxfmt
+  - oxlint
 minimumReleaseAgeExcludePrune: true
+trustPolicy: no-downgrade
 trustPolicyExcludePrune: true
 trustPolicyIgnoreAfter: 720
