@@ -140,6 +140,53 @@ export interface GlobalConfig {
 
 export interface Config {
   /**
+   * Deployment base path.
+   *
+   * Keep `"/"` when the site is served from a domain root (e.g. Netlify/Vercel custom domain). Set
+   * it to the sub-path (e.g. `"/my-repository/"`) when deploying to a GitHub Pages project site
+   * (`https://<user>.github.io/<repository>/`) or any other non-root path.
+   *
+   * 部署基础路径。
+   *
+   * 站点部署在域名根路径（如 Netlify/Vercel）时保持 `"/"`。
+   *
+   * 部署到 GitHub Pages 项目页等子路径时，设置为对应子路径（例如 `"/my-repository/"`）。
+   */
+  base?: string;
+
+  /**
+   * Public site URL used for absolute links (canonical, hreflang, sitemap, Open Graph).
+   *
+   * Include the deployment base path when the site is served from a sub-path, e.g.
+   * `"https://<user>.github.io/<repository>"`. Leave it empty to skip absolute URLs.
+   *
+   * 站点公开 URL，用于 canonical、hreflang、sitemap、Open Graph 等绝对链接。
+   *
+   * 站点部署在子路径时需包含 base 路径，例如 `"https://<user>.github.io/<repository>"`。不填则跳过绝对链接。
+   */
+  siteUrl?: string;
+
+  /**
+   * Favicon URL (absolute URL or `public/` path). Defaults to `"/favicon.svg"`; set it to `""` to
+   * disable the tag.
+   *
+   * 网站图标 URL（完整 URL 或 `public/` 路径），默认 `"/favicon.svg"`；设为 `""` 可禁用。
+   */
+  favicon?: string;
+
+  /**
+   * Social preview image (absolute URL or `public/` path) used for `og:image`/`twitter:image`.
+   *
+   * Provide a 1200×630 PNG/JPEG for reliable previews; AVIF is not supported by all social
+   * crawlers. Defaults to the hero avatar when omitted.
+   *
+   * 社交分享图（完整 URL 或 `public/` 路径），用于 `og:image`/`twitter:image`。
+   *
+   * 建议提供 1200×630 的 PNG/JPEG；部分社交爬虫不支持 AVIF。不填时回退到头像。
+   */
+  ogImage?: string;
+
+  /**
    * Global configuration
    *
    * 全局配置
