@@ -8,10 +8,34 @@ import type { ModuleNode, Plugin, ViteDevServer } from "vite";
 import { defineConfig } from "vite";
 
 import { CONFIG_FILES, getConfigDependencies, loadConfig } from "./lib/configLoader.js";
+import { escapeHtml } from "./lib/escapeHtml.js";
 import { ssgPlugin } from "./lib/ssgPlugin.js";
 
 // oxlint-disable-next-line unicorn/prefer-import-meta-properties -- `import.meta.dirname` resolves to Vite's temp bundle dir (`node_modules/.vite-temp`), not the project root. `import.meta.url` is rewritten by Vite to the original config file URL, so this is the only reliable way to get the root.
 const rootDir = fileURLToPath(new URL(".", import.meta.url));
+
+/**
+ * Normalize the user-configured `base` into the shape Vite expects: always a path starting and
+ * ending with `/`. `"/"` means the site is served from the domain root.
+ *
+ * 将配置中的 `base` 规范化为 Vite 需要的格式（始终以 `/` 开头和结尾）。
+ *
+ * @param base - Raw `base` value from the config file
+ * @returns Normalized base path
+ */
+const normalizeBase = (base?: string): string => {
+  if (!base || base === "/") return "/";
+
+  if (base.includes("://")) {
+    throw new Error(
+      `The \`base\` option must be a path such as "/my-repository/", not a full URL: ${base}`,
+    );
+  }
+
+  const normalized = base.replaceAll(/^\/+|\/+$/gu, "");
+
+  return normalized ? `/${normalized}/` : "/";
+};
 
 const injectCustomCssImportPlugin = ({
   customCSS = "../custom.css",
@@ -64,9 +88,25 @@ const injectCustomCssImportPlugin = ({
 
 export default defineConfig(async () => {
   const config = await loadConfig(rootDir);
+  let serializedConfig: string;
+
+  try {
+    serializedConfig = JSON.stringify(config);
+  } catch (err) {
+    throw new Error(
+      `Failed to serialize the configuration for the client bundle. The config must only contain JSON-serializable values: ${String(
+        err,
+      )}`,
+      { cause: err },
+    );
+  }
+
+  const buildYear = String(new Date().getFullYear());
 
   return {
     root: path.resolve(rootDir, "src"),
+
+    base: normalizeBase(config.base),
 
     build: {
       outDir: path.resolve(rootDir, "dist"),
@@ -76,17 +116,18 @@ export default defineConfig(async () => {
     publicDir: path.resolve(rootDir, "public"),
 
     define: {
-      __CONFIG__: JSON.stringify(config),
+      __CONFIG__: serializedConfig,
+      __BUILD_YEAR__: buildYear,
     },
     server: {
       port: 3000,
-      host: "0.0.0.0",
+      strictPort: true,
     },
     plugins: [
       react(),
       injectCustomCssImportPlugin(),
       tailwindcss(),
-      ssgPlugin(rootDir),
+      ssgPlugin(config, serializedConfig, buildYear),
       {
         name: "inject-title-and-meta",
         transformIndexHtml(html: string): string {
@@ -99,7 +140,8 @@ export default defineConfig(async () => {
 
           return html.replace(
             /<title>(?:.*?)<\/title>/u,
-            `<title>${title}</title>\n    <meta name="description" content="${description}" />`,
+            () =>
+              `<title>${escapeHtml(title)}</title>\n    <meta name="description" content="${escapeHtml(description)}" />`,
           );
         },
       },
@@ -124,10 +166,5 @@ export default defineConfig(async () => {
         },
       },
     ],
-    resolve: {
-      alias: {
-        "@": path.resolve(rootDir, "."),
-      },
-    },
   };
 });
