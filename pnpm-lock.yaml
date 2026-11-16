@@ -168,7 +168,7 @@ importers:
     dependencies:
       '@iconify/react':
         specifier: ^6.0.2
-        version: 6.0.2(react@19.3.0)
+        version: 6.0.4(react@19.3.0)
       react:
         specifier: ^19.3.0
         version: 19.3.0
@@ -245,10 +245,10 @@ packages:
   '@emnapi/wasi-threads@2.2.0':
     resolution: {integrity: sha512-JP7OYH38Q7+pyTAe14raZHLQIK7BDKbdwji+Xi3pcd/6QkJYQH3SX4wu6EplGrGJWRepoNzedfm0G3B9Z4e9Rw==}
 
-  '@iconify/react@6.0.2':
-    resolution: {integrity: sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==}
+  '@iconify/react@6.0.4':
+    resolution: {integrity: sha512-7nKd1eF52E1QGIl46eDWfMNPuTQHUxsXoK2Evgtu5jr386jCWTuWFLHM9vfsTNbUcKp+uq6ao+3skNUalDhH/w==}
     peerDependencies:
-      react: '>=16'
+      react: '>=18.0.0'
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1376,7 +1376,7 @@ snapshots:
       tslib: 2.9.1
     optional: true
 
-  '@iconify/react@6.0.2(react@19.3.0)':
+  '@iconify/react@6.0.4(react@19.3.0)':
     dependencies:
       '@iconify/types': 2.0.0
       react: 19.3.0
