@@ -299,7 +299,7 @@ locales:
     description: Mister-Hope 的个人作品集——前端开发者与物理教师。
     ui:
       themeToggle: 切换主题
-      contact: 联系
+      contacts: 联系
 
     hero:
       name: Mister-Hope
