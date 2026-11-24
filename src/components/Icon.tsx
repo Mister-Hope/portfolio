@@ -1,5 +1,8 @@
 import { Icon as Iconify } from "@iconify/react";
+import { useMemo } from "react";
 import type { FC, HTMLAttributes } from "react";
+
+import { resolveAssetUrl } from "../utils/index.js";
 
 export interface IconProps extends HTMLAttributes<HTMLElement> {
   /**
@@ -28,15 +31,24 @@ const resolveIcon = (icon: string): string => {
  * Supports Iconify icons and image URLs.
  */
 export const Icon: FC<IconProps> = ({ icon, className, style, ...props }) => {
+  const iconStyle = useMemo(
+    () => ({
+      display: "inline-flex",
+      minWidth: "1em",
+      minHeight: "1em",
+      alignItems: "center",
+      justifyContent: "center",
+      verticalAlign: "-0.125em",
+      ...style,
+    }),
+    [style],
+  );
+
   // Check for image URL
   if (icon.startsWith("/") || icon.startsWith("http")) {
-    const isExternal = icon.startsWith("http");
-    // Handle base path for local images
-    const src = isExternal ? icon : `${import.meta.env.BASE_URL.replace(/\/$/u, "") || ""}${icon}`;
-
     return (
       <img
-        src={src}
+        src={resolveAssetUrl(icon)}
         alt=""
         className={`icon-img ${className ?? ""}`}
         loading="lazy"
@@ -47,13 +59,20 @@ export const Icon: FC<IconProps> = ({ icon, className, style, ...props }) => {
     );
   }
 
+  const resolvedName = resolveIcon(icon);
+  const iconData = __ICON_DATA__[resolvedName];
+
+  // Reserve the em-box on a wrapper so the prerendered HTML and the first client paint occupy a
+  // stable size; `1em` scales with the font-size applied through `className`. Icons from installed
+  // `@iconify-json` sets are rendered from inlined data; the rest are still loaded at runtime.
   return (
-    <Iconify
-      icon={resolveIcon(icon)}
+    <span
       className={className}
-      style={style}
-      // oxlint-disable-next-line react/jsx-props-no-spreading, typescript/no-explicit-any
-      {...(props as any)}
-    />
+      style={iconStyle}
+      // oxlint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      <Iconify icon={iconData ?? resolvedName} width="1em" height="1em" ssr={iconData != null} />
+    </span>
   );
 };
