@@ -1,6 +1,7 @@
 {
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "author": {
     "name": "Mister-Hope"
   },
@@ -9,14 +10,17 @@
     "url": "https://github.com/Mister-Hope/portfolio-template.git"
   },
   "type": "module",
+  "imports": {
+    "#helper": "./src/helper.ts",
+    "#types": "./src/types/index.ts"
+  },
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "clean": "rimraf dist",
     "dev": "vite",
     "lint": "oxlint --fix && oxfmt",
     "lint:check": "oxlint && oxfmt --check",
-    "preview": "vite preview",
-    "test": "vitest run"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@iconify/react": "^6.0.3",
@@ -31,6 +35,8 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.3.0",
+    "ajv": "^8.20.0",
+    "image-size": "2.1.0",
     "js-yaml": "5.5.0",
     "markdown-it": "^15.0.3",
     "oxc-config-hope": "0.3.15",
@@ -41,10 +47,7 @@
     "tailwindcss": "4.3.5",
     "typescript": "~7.0.2",
     "unrun": "0.3.1",
-    "vite": "8.3.8",
-    "ajv": "^8.20.0",
-    "image-size": "2.1.0",
-    "vitest": "^5.0.5"
+    "vite": "8.3.8"
   },
   "devEngines": {
     "packageManager": {
@@ -57,11 +60,6 @@
       "version": "^22.23.4 || ^24.22.1 || ^26.13.0",
       "onFail": "error"
     }
-  },
-  "license": "MIT",
-  "imports": {
-    "#helper": "./src/helper.ts",
-    "#types": "./src/types/index.ts"
   },
   "packageManager": "pnpm@12.21.0"
 }
